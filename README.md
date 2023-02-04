@@ -1,27 +1,18 @@
-**!! Atenção: Renomeie o seu repositório para (Tema)_(NomeDoProjeto). !!** 
+
 
 Temas:
- - Grafos1
  - Grafos2
  - PD
- - D&C
- - Greed
- - Final 
- 
- **!! *Não coloque os nomes dos alunos no título do repositório*. Exemplo de título correto: Grafos2_Labirinto-do-Minotauro !!**
- 
- (Apague essa seção)
-
 # NomedoProjeto
 
-**Número da Lista**: X<br>
-**Conteúdo da Disciplina**: XXXXXXXXXX<br>
+**Número da Lista**: 2, 5<br>
+**Conteúdo da Disciplina**: Grafos 2 e Programação dinâmica<br>
 
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 180011600  |  Ailton Aires Amado |
+| 180042386  |  Kevin Luis Apolinario Batista |
 
 ## Sobre 
 Descreva os objetivos do seu projeto e como ele funciona. 
