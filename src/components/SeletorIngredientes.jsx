@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import UseDjikstra from "./useDjikstra";
 
 const ingredients = [
   { name: "Arroz", value: 1, calories: 200 },
   { name: "Feijão", value: 2, calories: 300 },
   { name: "Carne", value: 3, calories: 400 },
   { name: "Salada", value: 2, calories: 100 },
+  { name: "Batata", value: 1, calories: 150 },
+  { name: "Ovo", value: 2, calories: 100 },
+  { name: "Tomate", value: 1, calories: 50 },
 ];
 
 const knapsack = (maxCalories, weights, values, n) => {
@@ -15,7 +19,10 @@ const knapsack = (maxCalories, weights, values, n) => {
   for (let i = 1; i <= n; i++) {
     for (let w = 1; w <= maxCalories; w++) {
       if (weights[i - 1] <= w) {
-        dp[i][w] = Math.max(values[i - 1] + dp[i - 1][w - weights[i - 1]], dp[i - 1][w]);
+        dp[i][w] = Math.max(
+          values[i - 1] + dp[i - 1][w - weights[i - 1]],
+          dp[i - 1][w]
+        );
       } else {
         dp[i][w] = dp[i - 1][w];
       }
@@ -37,6 +44,7 @@ const knapsack = (maxCalories, weights, values, n) => {
 const SeletorIngredientes = () => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [maxCalories, setMaxCalories] = useState(500);
+  const [result, setResult] = useState(false);
 
   const handleSelectIngredient = (ingredient) => {
     setSelectedIngredients([...selectedIngredients, ingredient]);
@@ -45,9 +53,15 @@ const SeletorIngredientes = () => {
   const weights = ingredients.map((i) => i.calories);
   const values = ingredients.map((i) => i.value);
 
-  const totalCalories = selectedIngredients.reduce((acc, ingredient) => acc + ingredient.calories, 0);
+  const totalCalories = selectedIngredients.reduce(
+    (acc, ingredient) => acc + ingredient.calories,
+    0
+  );
 
-  const totalValue = selectedIngredients.reduce((acc, ingredient) => acc + ingredient.value, 0);
+  const totalValue = selectedIngredients.reduce(
+    (acc, ingredient) => acc + ingredient.value,
+    0
+  );
 
   return (
     <div>
@@ -56,14 +70,21 @@ const SeletorIngredientes = () => {
         {ingredients.map((ingredient) => (
           <li key={ingredient.name}>
             {ingredient.name} ({ingredient.calories} calorias, R$
-            {ingredient.value})<button onClick={() => handleSelectIngredient(ingredient)}>Selecionar</button>
+            {ingredient.value})
+            <button onClick={() => handleSelectIngredient(ingredient)}>
+              Selecionar
+            </button>
           </li>
         ))}
       </ul>
       <div>
         <label>
           Calorias máximas:
-          <input type="number" value={maxCalories} onChange={(e) => setMaxCalories(e.target.value)} />
+          <input
+            type="number"
+            value={maxCalories}
+            onChange={(e) => setMaxCalories(e.target.value)}
+          />
         </label>
       </div>
       <div>
@@ -89,7 +110,27 @@ const SeletorIngredientes = () => {
             </li>
           ))}
         </ul>
-        {totalCalories > maxCalories && <div>Atenção: você excedeu o limite de calorias!</div>}
+        <button
+          onClick={() => {
+            setResult(true);
+          }}
+        >
+          Calcular
+        </button>
+        {totalCalories > maxCalories && (
+          <div>Atenção: você excedeu o limite de calorias!</div>
+        )}
+      </div>
+      <div>
+        {result && (
+          <div>
+            <UseDjikstra
+              prop={selectedIngredients.map((ingredient) => {
+                return ingredient.name;
+              })}
+            ></UseDjikstra>
+          </div>
+        )}
       </div>
     </div>
   );

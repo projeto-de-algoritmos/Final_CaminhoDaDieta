@@ -1,10 +1,9 @@
-import './App.css';
-import SeletorIngredientes from './components/SeletorIngredientes';
+import "./App.css";
+import SeletorIngredientes from "./components/SeletorIngredientes";
 
 function App() {
   return (
     <div className="App">
-   
       <div>
         <SeletorIngredientes />
       </div>
