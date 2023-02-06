@@ -4,9 +4,7 @@ import SeletorIngredientes from "./components/SeletorIngredientes";
 function App() {
   return (
     <div className="App">
-      <div>
-        <SeletorIngredientes />
-      </div>
+      <SeletorIngredientes />
     </div>
   );
 }

@@ -1,13 +1,17 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const nodes = ["CASA", "A", "B", "C", "D", "E"];
+const nodes = ["CASA", "A", "B", "C", "D", "E", "F", "G", "H"];
 const edges = [
   { from: "CASA", to: "A", weight: 10 },
   { from: "A", to: "B", weight: 10 },
   { from: "A", to: "C", weight: 20 },
   { from: "B", to: "D", weight: 15 },
   { from: "C", to: "E", weight: 30 },
+  { from: "D", to: "F", weight: 5 },
+  { from: "E", to: "G", weight: 20 },
+  { from: "F", to: "H", weight: 10 },
+  { from: "CASA", to: "H", weight: 40 },
 ];
 const startNode = "CASA";
 const ingredients = {
@@ -17,6 +21,9 @@ const ingredients = {
   C: ["Arroz", "Feijão", "Carne", "Salada", "Batata"],
   D: ["Arroz", "Feijão", "Carne", "Salada", "Batata", "Ovo"],
   E: ["Arroz", "Feijão", "Carne", "Salada", "Batata", "Ovo", "Tomate"],
+  F: ["Arroz", "Feijão", "Carne", "Salada", "Batata", "Ovo", "Tomate", "Jiló"],
+  G: ["Arroz", "Feijão", "Carne", "Salada", "Batata", "Ovo", "Tomate", "Jiló", "Abacate"],
+  H: ["Arroz", "Feijão", "Carne", "Salada", "Batata", "Ovo", "Tomate", "Jiló", "Abacate", "Maçã"],
 };
 
 const UseDjikstra = (prop) => {
@@ -105,7 +112,7 @@ const UseDjikstra = (prop) => {
   return (
     <div>
       <p>Shortest Path: {result && shortestPath.path.join(" -> ")}</p>
-      <p>Distance: {result && shortestPath.distance}</p>
+      <p>Distance: {result && shortestPath.distance + " Metros"}</p>
     </div>
   );
 };
