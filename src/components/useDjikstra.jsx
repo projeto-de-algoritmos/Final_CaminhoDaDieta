@@ -17,14 +17,12 @@ const ingredients = {
   C: ["Arroz", "Feijão", "Carne", "Salada", "Batata"],
   D: ["Arroz", "Feijão", "Carne", "Salada", "Batata", "Ovo"],
   E: ["Arroz", "Feijão", "Carne", "Salada", "Batata", "Ovo", "Tomate"],
-  
 };
 
 const UseDjikstra = (prop) => {
   const [shortestPath, setShortestPath] = useState({});
   const [result, setResult] = useState(false);
-  const [resultIngredients, setResultIngredients] = useState(prop);
-  
+  const [resultIngredients] = useState(prop);
 
   const compareIngredients = (resultIngredients, ingredients) => {
     console.log("resultIngredients", resultIngredients);
@@ -94,14 +92,10 @@ const UseDjikstra = (prop) => {
       path.unshift(currentNode);
       currentNode = previousNodes[currentNode];
     }
-    console.log("path", path);
-    console.log("distances", distances);
     setShortestPath({
       path,
       distance: distances[restaurant],
     });
-    console.log("shortestPath", shortestPath);
-    // return shortestPath;
 
     setResult(true);
 
