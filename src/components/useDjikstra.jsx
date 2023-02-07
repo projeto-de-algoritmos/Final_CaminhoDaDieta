@@ -1,7 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
-
+import "vis-network/styles/vis-network.css";
+import { DataSet } from "vis-data/peer";
+import { Network } from "vis-network/peer";
 const nodes = ["CASA", "A", "B", "C", "D", "E", "F", "G", "H"];
+
 const edges = [
   { from: "CASA", to: "A", weight: 10 },
   { from: "A", to: "B", weight: 10 },
@@ -30,9 +33,9 @@ const UseDjikstra = (prop) => {
   const [shortestPath, setShortestPath] = useState({});
   const [result, setResult] = useState(false);
   const [resultIngredients] = useState(prop);
+  const [network, setNetwork] = useState(null);
 
   const compareIngredients = (resultIngredients, ingredients) => {
-    console.log("resultIngredients", resultIngredients);
     let count = 0;
     resultIngredients.prop.forEach((ingredient) => {
       if (ingredients.includes(ingredient)) {
@@ -106,6 +109,34 @@ const UseDjikstra = (prop) => {
 
     setResult(true);
 
+    const container = document.getElementById("mynetwork");
+    const data = {
+      nodes: new DataSet([
+        { id: 1, label: "CASA" },
+        { id: 2, label: "A" },
+        { id: 3, label: "B" },
+        { id: 4, label: "C" },
+        { id: 5, label: "D" },
+        { id: 6, label: "E" },
+        { id: 7, label: "F" },
+        { id: 8, label: "G" },
+        { id: 9, label: "H" },
+      ]),
+      edges: new DataSet([
+        { from: 1, to: 2, label: "10" },
+        { from: 2, to: 3, label: "10" },
+        { from: 2, to: 4, label: "20" },
+        { from: 3, to: 5, label: "15" },
+        { from: 4, to: 6, label: "30" },
+        { from: 5, to: 7, label: "5" },
+        { from: 6, to: 8, label: "20" },
+        { from: 7, to: 9, label: "10" },
+        { from: 1, to: 9, label: "40" },
+      ]),
+    };
+    const options = {};
+    setNetwork(new Network(container, data, options));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [result]);
 
@@ -113,6 +144,7 @@ const UseDjikstra = (prop) => {
     <div>
       <p>Shortest Path: {result && shortestPath.path.join(" -> ")}</p>
       <p>Distance: {result && shortestPath.distance + " Metros"}</p>
+      <div id="mynetwork" style={{ height: "400px" }}></div>
     </div>
   );
 };
