@@ -3,7 +3,7 @@ Temas:
 - Grafos2
 - PD
 
-# NomedoProjeto
+# Caminho da Dieta
 
 **Número da Lista**: 2, 5<br>
 **Conteúdo da Disciplina**: Grafos 2 e Programação dinâmica<br>
